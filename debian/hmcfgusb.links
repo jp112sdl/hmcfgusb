@@ -1,0 +1,5 @@
+/opt/hm/hmcfgusb/flash-hmcfgusb	/usr/bin/flash-hmcfgusb
+/opt/hm/hmcfgusb/flash-hmmoduart	/usr/bin/flash-hmmoduart
+/opt/hm/hmcfgusb/flash-ota	/usr/bin/flash-ota
+/opt/hm/hmcfgusb/hmsniff	/usr/bin/hmsniff
+/opt/hm/hmcfgusb/hmland		/usr/sbin/hmland

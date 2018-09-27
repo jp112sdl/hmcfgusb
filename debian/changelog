@@ -1,0 +1,40 @@
+hmcfgusb (0.103-1) unstable; urgency=low
+
+  * flash-ota: add support for HM-HMOD-UART and TSCUL
+  * hmsniff: add support for HM-MOD-UART
+  * flash-hmmoduart: firmware updating on HM-MOD-UART
+  * flash-ota: various bug-fixes
+
+ -- Michael Gernoth <michael@gernoth.net>  Mon, 23 Jan 2016 10:19:08 +0200
+
+hmcfgusb (0.102-1) unstable; urgency=low
+
+  * hmland: decrease poll-timeout to 250ms to improve performance
+    on Raspberry Pi
+  * all: allow HM-CFG-USB serial to be specified when using
+    multiple devices
+  * flash-ota: send device to bootloader automatically
+  * flash-ota: add workaround (-l) for cul-devices with little ram
+  * hmsniff: improve output
+
+ -- Michael Gernoth <michael@gernoth.net>  Sat, 7 Nov 2015 11:50:58 +0200
+
+hmcfgusb (0.101-1) unstable; urgency=low
+
+  * Update to new hmland version
+  * Don't enable logging by default
+  * Make hmland configurable by /etc/default/hmland
+
+ -- Michael Gernoth <michael@gernoth.net>  Thu, 16 Jul 2015 22:55:51 +0200
+
+hmcfgusb (0.097-2) unstable; urgency=low
+
+  * Add logrotate script
+
+ -- JSurf <jsurf@gmx.de>  Wed, 25 Jun 2014 10:37:00 +0200
+
+hmcfgusb (0.097-1) unstable; urgency=low
+
+  * Initial release
+
+ -- JSurf <jsurf@gmx.de>  Thu, 19 Jun 2014 09:42:47 +0200

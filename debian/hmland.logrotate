@@ -1,0 +1,9 @@
+/var/log/hmland.log {
+     rotate 12
+     weekly
+     compress
+     missingok
+     postrotate
+         /etc/init.d/hmland restart
+     endscript
+}

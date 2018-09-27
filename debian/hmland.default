@@ -1,0 +1,22 @@
+# Defaults for hmland initscript
+# sourced by /etc/init.d/hmland
+# installed at /etc/default/hmland by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# Is hmland enabled?
+HMLAND_ENABLED="1"
+
+# Port hmland is listening on
+HMLAND_PORT="1000"
+
+# Enable logging to /var/log/hmland.log
+#HMLAND_LOGGING="yes"
+HMLAND_LOGGING="no"
+
+# Additional options that are passed to hmland.
+# e.g. to listen on localhost only:
+#HMLAND_OPTS="-l 127.0.0.1"
+HMLAND_OPTS=""

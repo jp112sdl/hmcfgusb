@@ -40,6 +40,7 @@
 #include "hm.h"
 
 static int verbose = 0;
+static int shortmode = 0;
 
 /* See HMConfig.pm */
 char *hm_message_types(uint8_t type, uint8_t subtype)
@@ -163,8 +164,9 @@ static void dissect_hm(uint8_t *buf, int len)
 		printf("\n");
 
 		printf("\n");
-	} else {
-		if (!(count++ % 20))
+	} 
+        if (!shortmode) {
+		if (count++ == 0)
 			printf("                         LL NR FL CM sender recvr  payload\n");
 
 		printf("%s.%03ld: %02X %02X %02X %02X %02X%02X%02X %02X%02X%02X ",
@@ -177,7 +179,16 @@ static void dissect_hm(uint8_t *buf, int len)
 			printf("%02X", buf[i]);
 		}
 		printf("%s(%s)\n", (i>10)?" ":"", hm_message_types(buf[3], buf[10]));
-	}
+	} else {
+		if (count++ == 0) 
+		  printf("                         sender recvr\n");
+
+		printf("%s.%03ld: %02X%02X%02X %02X%02X%02X",
+				ts, tv.tv_usec/1000,
+				buf[4], buf[5], buf[6],
+				buf[7], buf[8], buf[9]);
+		printf("\n");
+        }
 }
 
 struct recv_data {
@@ -250,6 +261,7 @@ void hmsniff_syntax(char *prog)
 	fprintf(stderr, "\t-S serial\tuse HM-CFG-USB with given serial\n");
 	fprintf(stderr, "\t-U device\tuse HM-MOD-UART on given device\n");
 	fprintf(stderr, "\t-v\t\tverbose mode\n");
+	fprintf(stderr, "\t-s\t\tshort output mode\n");
 	fprintf(stderr, "\t-V\t\tshow version (" VERSION ")\n");
 
 }
@@ -267,7 +279,7 @@ int main(int argc, char **argv)
 
 	dev.type = DEVICE_TYPE_HMCFGUSB;
 
-	while((opt = getopt(argc, argv, "fS:U:vV")) != -1) {
+	while((opt = getopt(argc, argv, "fS:U:vVs")) != -1) {
 		switch (opt) {
 			case 'f':
 				speed = 100;
@@ -282,6 +294,9 @@ int main(int argc, char **argv)
 			case 'v':
 				verbose = 1;
 				break;
+                        case 's':
+                                shortmode = 1;
+                                break;
 			case 'V':
 				printf("hmsniff " VERSION "\n");
 				printf("Copyright (c) 2013-16 Michael Gernoth\n\n");

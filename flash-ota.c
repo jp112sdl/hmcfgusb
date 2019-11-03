@@ -45,12 +45,13 @@
 #include "hmuartlgw.h"
 #include "util.h"
 
-#define MAX_RETRIES		5
+
 #define NORMAL_MAX_PAYLOAD	37
 #define LOWER_MAX_PAYLOAD	17
 
 extern char *optarg;
 
+uint8_t max_retries = 5;
 uint32_t hmid = 0;
 uint32_t my_hmid = 0;
 uint8_t key[16] = {0};
@@ -626,6 +627,7 @@ void flash_ota_syntax(char *prog)
 	fprintf(stderr, "\t-l\t\tlower payloadlen (required for devices with little RAM, e.g. CUL v2 and CUL v4)\n");
 	fprintf(stderr, "\t-S serial\tuse HM-CFG-USB with given serial\n");
 	fprintf(stderr, "\t-U device\tuse HM-MOD-UART on given device\n");
+	fprintf(stderr, "\t-r\t\tnumber of retries, default 5\n");
 	fprintf(stderr, "\t-h\t\tthis help\n");
 	fprintf(stderr, "\nOptional parameters for automatically sending device to bootloader\n");
 	fprintf(stderr, "\t-C\t\tHMID of central (3 hex-bytes, no prefix, e.g. ABCDEF)\n");
@@ -662,7 +664,7 @@ int main(int argc, char **argv)
 
 	printf("HomeMatic OTA flasher version " VERSION "\n\n");
 
-	while((opt = getopt(argc, argv, "b:c:f:hls:C:D:K:S:U:")) != -1) {
+	while((opt = getopt(argc, argv, "b:c:f:hls:C:D:K:S:U:r:")) != -1) {
 		switch (opt) {
 			case 'b':
 				bps = atoi(optarg);
@@ -721,6 +723,9 @@ int main(int argc, char **argv)
 				break;
 			case 'U':
 				uart = optarg;
+				break;
+			case 'r':
+				max_retries = atoi(optarg);
 				break;
 			case 'h':
 			case ':':
@@ -1253,7 +1258,7 @@ int main(int argc, char **argv)
 			} else {
 				pos = &(fw->fw[block][2]);
 				cnt++;
-				if (cnt == MAX_RETRIES) {
+				if (cnt == max_retries) {
 					fprintf(stderr, "\nToo many errors, giving up!\n");
 					exit(EXIT_FAILURE);
 				} else {

@@ -627,12 +627,12 @@ void flash_ota_syntax(char *prog)
 	fprintf(stderr, "\t-l\t\tlower payloadlen (required for devices with little RAM, e.g. CUL v2 and CUL v4)\n");
 	fprintf(stderr, "\t-S serial\tuse HM-CFG-USB with given serial\n");
 	fprintf(stderr, "\t-U device\tuse HM-MOD-UART on given device\n");
+	fprintf(stderr, "\t-r\t\tnumber of retries, default 5\n");
 	fprintf(stderr, "\t-h\t\tthis help\n");
 	fprintf(stderr, "\nOptional parameters for automatically sending device to bootloader\n");
 	fprintf(stderr, "\t-C\t\tHMID of central (3 hex-bytes, no prefix, e.g. ABCDEF)\n");
 	fprintf(stderr, "\t-D\t\tHMID of device (3 hex-bytes, no prefix, e.g. 123456)\n");
 	fprintf(stderr, "\t-K\t\tKNO:KEY AES key-number and key (hex) separated by colon (Fhem hmKey attribute)\n");
-	fprintf(stderr, "\t-r\t\tnumber of retries, default 5\n");
 }
 
 int main(int argc, char **argv)
